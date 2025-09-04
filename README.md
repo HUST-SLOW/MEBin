@@ -29,20 +29,20 @@ The complete code for the **MEBin** method, as described in our **AnomalyNCD** [
 ## Abstract: <a href='#all_catelogue'>[Back to Catalogue]</a>
 
 To provide a clear anomaly indication of unlabeled images,
-we use an anomaly detection method on $I^\mathbf{u}_i$ to generate the anomaly probability map, denoted as $A_i\!\in\![0,1]^{H \times W}$.
+we use an anomaly detection method on $I^\mathbf{u}_i$ to generate the anomaly probability map, denoted as $A_i\in[0,1]^{H \times W}$.
 However, $A_i$ inevitably contains false positives (over-detections) and false negatives (missed detections).
 These errors can negatively affect multi-class anomaly classification.
 To address this, we propose a Main Element Binarization (MEBin) approach.
 It extracts the principal anomaly structures (Main Element) from $A_i$ by focusing on stable regions across small threshold variations.
 Overall,
 the MEBin consists of three steps:
-- Predefine a range $[\mathbf{s}_{\min},\mathbf{s}_{\max}]$ for threshold exploration;
+- Predefine a range[<b>S</b><sub>min</sub>, <b>S</b><sub>max</sub>]for threshold exploration;
 - Binarize $A_i$ across all thresholds within this range;
 - Identify the main elements in $A_i$ based on the changes of segmented regions under different binarization results.
 
 **Binarization Process:**
 The MEBin algorithm performs adaptive threshold selection through the following mechanism:
-- **Threshold Range Adaptation**: Dynamically determines the search range $[\mathbf{s}_{\min},\mathbf{s}_{\max}]$ based on the maximum and minimum anomaly scores across all input images, ensuring the search space covers the actual anomaly score distribution.
+- **Threshold Range Adaptation**: Dynamically determines the search range[<b>S</b><sub>min</sub>, <b>S</b><sub>max</sub>]based on the maximum and minimum anomaly scores across all input images, ensuring the search space covers the actual anomaly score distribution.
 - **Stable Interval Detection**: Searches for "stable intervals" where the number of connected components remains constant across consecutive threshold values. A stable interval is defined as a continuous threshold range where the connected component count is invariant and the interval length exceeds the minimum threshold `min_interval_len`.
 - **Optimal Threshold Selection**: Selects the threshold corresponding to the longest stable interval, which represents the most robust anomaly structure. If no stable interval is found, it indicates no anomaly regions exist and returns threshold 255.
 - **Noise Reduction**: Applies erosion operation to the binarized result to eliminate noise and smooth the change process of abnormal connected components.
