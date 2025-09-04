@@ -1,0 +1,25 @@
+dataset:
+  dataset_name: 'mvtec_ad'
+  dataset_path: 'data/mvtec_anomaly_detection' # if you want to evaluate the binarization method or crop, please set the dataset_path to the path of the dataset
+  ad_method: 'MuSc'  # options: MuSc, GLASS, CPR, DSR, patchcore, uniformaly, PNI, RD++, efficientAD
+  anomaly_map_path: 'data/mvtec_ad/MuSc'  # MuSc
+
+binarization:
+  state: True
+  binarization_method: 'MEBin'  # options: MEBin, FixedThresholdBin, OtsuBin
+  # configuration for MEBin
+  sample_rate: 4
+  min_interval_len: 4
+  erode: True
+  # configuration for FixedThresholdBin
+  fixed_threshold: 0.5
+  output_path: 'outputs/binarization'
+
+cropping:
+  cropping_state: True
+  gt_crop: False
+  crop_output_path: 'outputs/cropping'
+
+evaluation:
+  evaluation_state: True
+  eval_output_path: 'outputs/evaluation'
